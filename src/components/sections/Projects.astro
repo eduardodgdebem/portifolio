@@ -23,12 +23,12 @@ const projectList = await fetch(
   });
 ---
 
-<div class="backdrop-blur-3xl rounded-md sm:group bg-black/60 dark:bg-transparent" id="projects">
+<div class="backdrop-blur-3xl rounded-md group bg-black/60 dark:bg-transparent py-2" id="projects">
   <h2 class="text-3xl flex items-center gap-2 font-bold">
     <div class="h-2 w-5 bg-green-500 group-hover:w-10 duration-100"></div>
      Projects
   </h2>
-  <ul class="group duration-100">
+  <ul>
     {
       projectList?.map((project) => (
         <li>
