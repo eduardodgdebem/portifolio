@@ -1,0 +1,40 @@
+---
+import type { ProjectType } from "../../shared/github.types";
+import ProjectCard from "../ProjectCard";
+
+const projectList = await fetch(
+  "https://api.github.com/users/eduardodgdebem/repos",
+  {
+    headers: {
+      Authorization: "Bearer " + process.env.GIT_AUTH,
+    },
+  }
+)
+  .then((res) => res.json())
+  .then((projects: ProjectType[]) => {
+    if (!projects?.length) return;
+    return projects
+      ?.sort((a, b) => {
+        const aDate = new Date(b.updated_at) as unknown as number;
+        const bDate = new Date(a.updated_at) as unknown as number;
+        return aDate - bDate;
+      })
+      .filter((project) => project?.homepage);
+  });
+---
+
+<div class="backdrop-blur-3xl rounded-md sm:group bg-black/60 dark:bg-transparent" id="projects">
+  <h2 class="text-3xl flex items-center gap-2 font-bold">
+    <div class="h-2 w-5 bg-green-500 group-hover:w-10 duration-100"></div>
+     Projects
+  </h2>
+  <ul class="group duration-100">
+    {
+      projectList?.map((project) => (
+        <li>
+          <ProjectCard project={project} client:load />
+        </li>
+      ))
+    }
+  </ul>
+</div>

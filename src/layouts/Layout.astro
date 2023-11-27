@@ -1,0 +1,99 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="dark:bg-stone-900 text-stone-200 bg-stone-200 ">
+    <div class="z-30">
+      <slot />
+    </div>
+    <div
+      id="test"
+      class="absolute w-full h-full top-0 left-0 dark:bg-black bg-stone-200 -z-10 overflow-hidden dark:text-green-500 text-stone-700 text-sm"
+    >
+    </div>
+  </body>
+</html>
+
+<script>
+  const s =
+    " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+
+  const getRandomChar = () => s.at(Math.random() * s.length - 1);
+  const getRandomString = (length: number) => {
+    let str = "";
+    for (let i = 0; i < length; i++) {
+      str += getRandomChar();
+    }
+    return str;
+  };
+
+  const element = document.getElementById("test");
+
+  const numOfCharInTheBody = () => {
+    const bodyElement = document.body;
+    const divWidth = bodyElement.clientWidth;
+    const divHeight = bodyElement.clientHeight;
+    const fontSize = parseInt(window.getComputedStyle(bodyElement).fontSize);
+    const lineHeight = parseInt(
+      window.getComputedStyle(bodyElement).lineHeight
+    );
+
+    const charsPerLine = Math.floor(divWidth / (fontSize * 0.3));
+    const lines = Math.floor(divHeight / lineHeight);
+
+    const totalChars = charsPerLine * lines;
+    return totalChars
+  };
+
+  let numOfChar = numOfCharInTheBody()
+
+  window.addEventListener("resize", () => {
+    numOfChar = numOfCharInTheBody()
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!element) return;
+    element.innerText = getRandomString(numOfChar);
+    const { x, y } = document.body.getBoundingClientRect();
+    element?.style.setProperty("--height", document.body.clientHeight + "px");
+    const trueX = e.clientX - x;
+    const trueY = e.clientY - y;
+    element.style.setProperty("--circleX", `${trueX}px`);
+    element.style.setProperty("--circleY", `${trueY}px`);
+  });
+</script>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<style>
+  #test {
+    --circleX: 0px;
+    --circleY: 0px;
+    --height: 100vsh;
+
+    height: var(--height);
+    mask-image: radial-gradient(
+      500px circle at var(--circleX) var(--circleY),
+      black 0%,
+      transparent 50%
+    );
+  }
+</style>

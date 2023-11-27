@@ -1,0 +1,91 @@
+---
+import TypingHeading from "../components/TypingHeading";
+import About from "../components/sections/About.astro";
+import Projects from "../components/sections/Projects.astro";
+import LinkedinSvg from "../components/svg/LinkedinSvg.astro";
+import MailSvg from "../components/svg/MailSvg.astro";
+import GithubSvg from "../components/svg/GithubSvg.astro";
+import Layout from "../layouts/Layout.astro";
+import { getByUrl } from "../shared/github";
+import { Picture } from "astro:assets";
+import ThemeIcon from "../components/ThemeIcon.astro";
+
+const headings = ["Developer", "Front end", "Problem solver"];
+const profile = await getByUrl<{ avatar_url: string }>(
+  "https://api.github.com/users/eduardodgdebem"
+);
+const profileImgUrl = profile?.avatar_url;
+---
+
+<Layout title="Welcome to Astro.">
+  <div class="flex h-fit max-w-screen max-md:flex-col justify-center z-30">
+    <section
+      class="h-fit md:h-screen w-full md:w-[40vw] flex flex-col justify-between p-10 md:py-20 md:sticky top-0 max-sm:p-4 max-sm:gap-8"
+    >
+      <main class="w-full backdrop-blur-lg rounded-md pb-2 bg-black/60 dark:bg-transparent">
+        <header class="flex w-full p-2 gap-2">
+          <Picture
+            src={profileImgUrl}
+            alt="profile_img"
+            height={100}
+            width={100}
+            class="w-[13rem] aspect-square rounded-md max-sm:hidden"
+          />
+          <div>
+            <h1 class="text-5xl font-semibold">Eduardo de Bem</h1>
+            <TypingHeading
+              className="text-4xl text-green-500"
+              headings={headings}
+              client:load
+            />
+          </div>
+        </header>
+        <nav class="text-lg max-sm:text-xl">
+          <ul>
+            <li>
+              <a href="#about" class="flex items-center gap-2 group">
+                <div class="h-2 w-2 group-hover:w-10 bg-green-500 duration-100">
+                </div>
+                 About</a
+              >
+            </li>
+            <li>
+              <a href="#projects" class="flex items-center gap-2 group">
+                <div class="h-2 w-2 group-hover:w-10 bg-green-500 duration-100">
+                </div>Projects</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </main>
+      <footer class="backdrop-blur-lg p-2 w-[100%] rounded-md max-sm:w-full bg-black/60 dark:bg-transparent">
+        <ul class="flex justify-between items-center">
+          <li>
+            <a href="https://github.com/eduardodgdebem" target="_blank">
+              <GithubSvg className="fill-gray-200 h-8 hover:fill-green-500 duration-100" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/eduardo-goulart-de-bem-a60a3b216" target="_blank">
+              <LinkedinSvg className="fill-gray-200 h-8 hover:fill-green-500 duration-100" />
+            </a>
+          </li>
+          <li>
+            <a href="mailto:eduardogdebem@gmail.com" target="_blank">
+              <MailSvg className="fill-gray-200 h-9 hover:fill-green-500 duration-100" />
+            </a>
+          </li>
+          <li class="h-min">
+            <ThemeIcon />
+          </li>
+        </ul>
+      </footer>
+    </section>
+    <section
+      class="w-full md:w-[48vw] p-10 max-sm:p-4 md:py-20 h-fit flex flex-col gap-4"
+    >
+      <About />
+      <Projects />
+    </section>
+  </div>
+</Layout>
