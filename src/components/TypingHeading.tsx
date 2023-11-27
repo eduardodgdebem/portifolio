@@ -18,7 +18,7 @@ const TypingHeading = ({
     const heading = headings[i];
     for (let i = 0; i < heading.length; i++) {
       setHeading((currHeading) => currHeading + heading.at(i));
-      await sleep(Math.random() * 500);
+      await sleep(Math.random() * 200);
     }
   };
 
@@ -28,7 +28,7 @@ const TypingHeading = ({
       while (true) {
         await typingHeading(teste);
         teste = teste + 1 > headings.length - 1 ? 0 : teste + 1;
-        await sleep(3000);
+        await sleep(4000);
         setHeading("");
       }
     })();

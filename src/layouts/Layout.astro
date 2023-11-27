@@ -16,12 +16,12 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="dark:bg-stone-900 text-stone-200 bg-stone-200 ">
-    <div class="z-30">
+  <body class="dark:bg-stone-900 text-stone-200 bg-stone-200">
+    <div class="z-30 backdrop-blur-sm">
       <slot />
     </div>
     <div
-      id="test"
+      id="background"
       class="absolute w-full h-full top-0 left-0 dark:bg-black bg-stone-200 -z-10 overflow-hidden dark:text-green-500 text-stone-700 text-sm break-all"
     >
     </div>
@@ -41,7 +41,7 @@ const { title } = Astro.props;
     return str;
   };
 
-  const element = document.getElementById("test");
+  const element = document.getElementById("background");
 
   const numOfCharInTheBody = () => {
     const bodyElement = document.body;
@@ -84,7 +84,7 @@ const { title } = Astro.props;
 </style>
 
 <style>
-  #test {
+  #background {
     --circleX: 0px;
     --circleY: 0px;
     --height: 100vsh;
