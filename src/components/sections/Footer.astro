@@ -1,0 +1,40 @@
+---
+import GithubSvg from "../svg/GithubSvg.astro";
+import LinkedinSvg from "../svg/LinkedinSvg.astro";
+import MailSvg from "../svg/MailSvg.astro";
+import ThemeIcon from "../ThemeIcon.astro";
+---
+
+<footer
+  class="p-2 w-[100%] rounded-md max-sm:w-full bg-black/60 dark:bg-transparent"
+>
+  <ul class="flex justify-between items-center">
+    <li>
+      <a href="https://github.com/eduardodgdebem" target="_blank">
+        <GithubSvg
+          className="fill-gray-200 h-8 hover:fill-green-500 duration-100"
+        />
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://www.linkedin.com/in/eduardo-goulart-de-bem-a60a3b216"
+        target="_blank"
+      >
+        <LinkedinSvg
+          className="fill-gray-200 h-8 hover:fill-green-500 duration-100"
+        />
+      </a>
+    </li>
+    <li>
+      <a href="mailto:eduardogdebem@gmail.com" target="_blank">
+        <MailSvg
+          className="fill-gray-200 h-9 hover:fill-green-500 duration-100"
+        />
+      </a>
+    </li>
+    <li class="h-min">
+      <ThemeIcon />
+    </li>
+  </ul>
+</footer>
