@@ -14,7 +14,7 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
         <img
           alt={`${project.name} site`}
           src={`/images/project-${project.name}.jpeg`}
-          className="w-[8rem] max-w-none object-contain rounded-sm"
+          className="w-[10rem] max-w-none object-contain rounded-sm"
         />
       </a>
       <div className="w-full">

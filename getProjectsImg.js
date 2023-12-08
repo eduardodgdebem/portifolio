@@ -25,6 +25,12 @@ const projectList = await fetch(
 const browser = await puppeteer.launch();
 const page = await browser.newPage();
 
+await page.setViewport({
+    width: 1280,
+    height: 800,
+  });
+  
+
 for (let i = 0; i < projectList.length - 1; i++) {
   try {
     const project = projectList[i]
@@ -37,6 +43,7 @@ for (let i = 0; i < projectList.length - 1; i++) {
     await page.screenshot({
       type: "jpeg",
       path: `./public/images/project-${project.name}.jpeg`,
+      quality: 100
     });
   } catch (e) {
     console.log(e);
