@@ -37,7 +37,7 @@ for (let i = 0; i < projectList.length - 1; i++) {
     let url = project.homepage;
     if (!url.startsWith("https://")) url = "https://" + url;
 
-    console.log("============= " + project.name + " =============");
+    console.log("============= " + url + " =============");
 
     await page.goto(url, { waitUntil: "networkidle0" });
     await page.screenshot({
